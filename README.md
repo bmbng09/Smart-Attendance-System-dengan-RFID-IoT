@@ -34,15 +34,12 @@ Dengan sistem ini, guru tidak perlu lagi mencatat kehadiran secara manual, dan d
 2. ESP32 membaca UID dari kartu.
 3. Buzzer berbunyi sebagai konfirmasi.
 4. Data UID + Timestamp dikirim ke:
-   - **Google Sheets via IFTTT Webhook**, atau
-   - **Firebase Realtime Database** secara langsung.
+   - **Google Sheets**
 
-## 🧰 Teknologi & Tools
+## 🧰 Tools
 
 - **Arduino IDE** untuk pemrograman ESP32
-- **Libraries**: `MFRC522`, `WiFi.h`, `HTTPClient.h`, `FirebaseESP32.h`
-- **IFTTT Webhook** atau **Google Sheets API**
-- **Firebase** (alternatif penyimpanan real-time)
 - **Google Sheets** untuk tampilan data
+
 
 
