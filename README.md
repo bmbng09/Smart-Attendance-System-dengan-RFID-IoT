@@ -39,8 +39,9 @@ Dengan sistem ini, guru tidak perlu lagi mencatat kehadiran secara manual, dan d
 - **Arduino IDE** untuk pemrograman ESP32
 - **Google Sheets** untuk tampilan data
 
-## Skema
-![Smart Attendance Diagram](https://imgur.com/4zMSOno)
+## 📊 Smart Attendance System Diagram
+![Smart Attendance Diagram](https://i.imgur.com/4zMSOno.png)
+
 
 
 
