@@ -40,7 +40,8 @@ Dengan sistem ini, guru tidak perlu lagi mencatat kehadiran secara manual, dan d
 - **Google Sheets** untuk tampilan data
 
 ## Skema
-![Smart Attendance Diagram]([https://i.imgur.com/namafile.png](https://imgur.com/4zMSOno))
+![Smart Attendance Diagram](https://imgur.com/4zMSOno)
+
 
 
 
