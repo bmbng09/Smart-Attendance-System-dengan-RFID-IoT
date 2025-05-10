@@ -1,5 +1,3 @@
-﻿# Smart-Attendance-System-dengan-RFID-IoT
-
  # 📡 Smart Attendance System with RFID & IoT
 
 ![IoT Attendance Banner](https://img.shields.io/badge/IoT-Smart_Attendance-blue?style=flat-square)
@@ -40,6 +38,10 @@ Dengan sistem ini, guru tidak perlu lagi mencatat kehadiran secara manual, dan d
 
 - **Arduino IDE** untuk pemrograman ESP32
 - **Google Sheets** untuk tampilan data
+
+## Skema
+![Smart Attendance Diagram]([https://i.imgur.com/namafile.png](https://imgur.com/4zMSOno))
+
 
 
 
