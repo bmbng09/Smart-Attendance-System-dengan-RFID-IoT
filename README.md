@@ -3,6 +3,10 @@
 ![IoT Attendance Banner](https://img.shields.io/badge/IoT-Smart_Attendance-blue?style=flat-square)
 ![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)
 
+## Kelompok 10
+- **BAMBANG ISTIJAB - 105222007**
+- **ATHIRAH RASHIDA NAIMA - 105222027**
+
 ## 📘 Deskripsi Proyek
 
 Proyek ini merupakan sistem absensi otomatis berbasis **RFID** dan **Internet of Things (IoT)** menggunakan **ESP32**, yang dirancang untuk meningkatkan efisiensi dan transparansi dalam pencatatan kehadiran siswa di lingkungan pendidikan.
