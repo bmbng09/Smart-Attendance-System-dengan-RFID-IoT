@@ -48,19 +48,19 @@ Dengan sistem ini, guru tidak perlu lagi mencatat kehadiran secara manual, dan d
 
 ## 📊 Diagram Blok System
 **Penjelasan Alur Kerja:**
-- **RFID Card & RFID RC522**: Siswa memindai kartu RFID mereka ke modul RFID RC522. Modul ini membaca UID (Unique ID) dari kartu.
-- **ESP32 Microcontroller**:
+1. **RFID Card & RFID RC522**: Siswa memindai kartu RFID mereka ke modul RFID RC522. Modul ini membaca UID (Unique ID) dari kartu.
+2. **ESP32 Microcontroller**:
  - Menerima data UID dari RFID RC522 melalui komunikasi SPI.
  - Memproses UID tersebut.
  - Mengaktifkan Buzzer untuk memberikan feedback audio (misalnya, bunyi "beep" setelah pemindaian berhasil).
  - Menggunakan modul Wi-Fi internalnya untuk terhubung ke internet.
  - Mengirimkan data UID dan timestamp ke Cloud Platform yang dipilih 
-- **Buzzer**: Memberikan sinyal suara kepada siswa bahwa pemindaian telah terdeteksi atau memberikan indikasi error.
-- **Cloud Platform**:
+3. **Buzzer**: Memberikan sinyal suara kepada siswa bahwa pemindaian telah terdeteksi atau memberikan indikasi error.
+4. **Cloud Platform**:
  - IFTTT Webhook: Berfungsi sebagai jembatan. ESP32 mengirimkan data ke webhook IFTTT, yang kemudian memicu aksi untuk menambahkan data ke Google Sheets.
-- **Data Storage**:
+5. **Data Storage**:
 Data kehadiran (UID, timestamp) disimpan di Google Sheets 
-- **User Interface**: Data yang tersimpan dapat diakses dan divisualisasikan melalui dashboard web, aplikasi mobile, atau laporan yang dibuat dari Google Sheets, memungkinkan guru atau administrator memantau kehadiran siswa secara real-time atau melihat riwayat.
+6. **User Interface**: Data yang tersimpan dapat diakses dan divisualisasikan melalui dashboard web, aplikasi mobile, atau laporan yang dibuat dari Google Sheets, memungkinkan guru atau administrator memantau kehadiran siswa secara real-time atau melihat riwayat.
 ![Smart Attendance Blok Diagram system](https://i.imgur.com/Tqk1CP3.png)
 
 
