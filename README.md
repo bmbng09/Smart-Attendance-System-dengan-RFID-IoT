@@ -46,6 +46,9 @@ Dengan sistem ini, guru tidak perlu lagi mencatat kehadiran secara manual, dan d
 ## 📊 Smart Attendance System Diagram
 ![Smart Attendance Diagram](https://i.imgur.com/4zMSOno.png)
 
+## 📊 Diagram Blok System
+![Smart Attendance Blok Diagram system](https://i.imgur.com/tUCnnef.png)
+
 
 
 
