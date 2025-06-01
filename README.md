@@ -1,7 +1,6 @@
  # 📡 Smart Attendance System with RFID & IoT
 
 ![IoT Attendance Banner](https://img.shields.io/badge/IoT-Smart_Attendance-blue?style=flat-square)
-![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)
 
 ## Kelompok 10
 - **BAMBANG ISTIJAB - 105222007**
@@ -11,11 +10,11 @@
 
 Proyek ini merupakan sistem absensi otomatis berbasis **RFID** dan **Internet of Things (IoT)** menggunakan **ESP32**, yang dirancang untuk meningkatkan efisiensi dan transparansi dalam pencatatan kehadiran siswa di lingkungan pendidikan.
 
-Sistem ini mendukung **SDG 4: Quality Education**, dengan mengirimkan data kehadiran secara otomatis ke **Google Sheets** atau **Firebase** menggunakan koneksi Wi-Fi dan platform seperti **IFTTT**.
+Sistem ini mendukung **SDG 4: Quality Education**, dengan mengirimkan data kehadiran secara otomatis ke **Google Sheets**  menggunakan koneksi Wi-Fi dan platform seperti **IFTTT**.
 
 ## 🎯 Tujuan
 
-> **Siswa scan RFID → data hadir dikirim otomatis ke cloud (Google Sheets atau Firebase).**
+> **Siswa scan RFID → data hadir dikirim otomatis ke cloud (Google Sheets).**
 
 Dengan sistem ini, guru tidak perlu lagi mencatat kehadiran secara manual, dan data dapat diakses secara real-time dari mana saja.
 
@@ -40,7 +39,7 @@ Dengan sistem ini, guru tidak perlu lagi mencatat kehadiran secara manual, dan d
 
 ## 🧰 Tools
 
-- **Arduino IDE** untuk pemrograman ESP32
+- **Thony** untuk pemrograman ESP32
 - **Google Sheets** untuk tampilan data
 
 ## 📊 Smart Attendance System Diagram
@@ -62,6 +61,65 @@ Dengan sistem ini, guru tidak perlu lagi mencatat kehadiran secara manual, dan d
 Data kehadiran (UID, timestamp) disimpan di Google Sheets 
 6. **User Interface**: Data yang tersimpan dapat diakses dan divisualisasikan melalui dashboard web, aplikasi mobile, atau laporan yang dibuat dari Google Sheets, memungkinkan guru atau administrator memantau kehadiran siswa secara real-time atau melihat riwayat.
 ![Smart Attendance Blok Diagram system](https://i.imgur.com/Tqk1CP3.png)
+
+## 📊 Desain sistem hardware
+I. Lapisan Hardware (Komponen Fisik)
+1. Input Fisik:
+* RFID Card (Kartu Siswa): Media identifikasi fisik siswa.
+* RFID RC522 Reader: Modul untuk membaca data dari kartu RFID.
+* Koneksi ke ESP32: Melalui protokol SPI (Serial Peripheral Interface).
+* RC522 VCC -> ESP32 3.3V
+* RC522 RST (GPIO 22) -> ESP32 GPIO 22
+* RC522 GND -> ESP32 GND
+* RC522 MISO (GPIO 19) -> ESP32 GPIO 19
+* RC522 MOSI (GPIO 23) -> ESP32 GPIO 23
+* RC522 SCK (GPIO 18) -> ESP32 GPIO 18
+* RC522 SDA (SS) (GPIO 21) -> ESP32 GPIO 21
+
+2. Unit Pemrosesan:
+* ESP32 Development Board: Mikrokontroler utama yang menjalankan logika sistem.
+* Kemampuan: Pemrosesan data, konektivitas Wi-Fi, kontrol I/O.
+* Power Supply: Melalui port USB (dari komputer/adaptor) atau pin Vin/5V.
+
+3. Output Fisik / Feedback:
+* Buzzer: Memberikan indikasi suara (beep) sebagai feedback kepada pengguna.
+* Koneksi ke ESP32: Melalui pin GPIO digital.
+* Buzzer Positif (+) -> ESP32 GPIO 4
+* Buzzer Negatif (-) -> ESP32 GND
+
+II. Lapisan Software (MicroPython di ESP32)
+1. Firmware Dasar:
+* MicroPython OS: Sistem operasi yang berjalan di ESP32, memungkinkan pemrograman dengan Python.
+
+2. Modul/Library Python:
+* mfrc522.py: Modul khusus yang berisi driver untuk berkomunikasi dengan hardware RFID RC522 (membaca UID, autentikasi, read/write blok data).
+* boot.py: File Python yang dieksekusi saat ESP32 pertama kali booting. Bertanggung jawab untuk inisialisasi koneksi Wi-Fi.
+* main.py: File Python utama yang berisi logika inti aplikasi:
+* Membaca UID dari kartu RFID.
+* Membunyikan buzzer untuk feedback.
+* Mengambil timestamp.
+* Memformat data kehadiran.
+* Mengirim data kehadiran (UID & timestamp) ke cloud platform.
+* (Opsional: menulis/membaca data lain ke blok kartu RFID).
+* Library Standar MicroPython: machine, network, time, urequests, os (digunakan secara internal).
+
+III. Lapisan Konektivitas
+1. Jaringan Nirkabel:
+* Wi-Fi: ESP32 terhubung ke jaringan Wi-Fi (2.4GHz) untuk mengakses internet.
+* (Bisa hotspot ponsel atau Wi-Fi standar).
+
+2. Protokol Komunikasi:
+* HTTP/HTTPS: Digunakan oleh ESP32 (urequests) untuk mengirim data ke layanan cloud (IFTTT atau Firebase REST API).
+
+IV. Lapisan Cloud (Backend & Data Storage)
+Pilihan A: IFTTT + Google Sheets
+
+IFTTT (If This Then That):
+Webhooks Service (Trigger): Menerima permintaan HTTP POST dari ESP32 (event: absensi_rfid).
+Google Sheets Service (Action): Menambahkan baris baru ke Google Sheet berdasarkan data yang diterima dari webhook.
+Google Sheets:
+Database Sederhana: Menyimpan data kehadiran dalam format tabel (kolom contoh: UID_Kartu, Timestamp, Nama_Siswa, Status).
+
 
 
 
