@@ -3,8 +3,8 @@
 ![IoT Attendance Banner](https://img.shields.io/badge/IoT-Smart_Attendance-blue?style=flat-square)
 
 ## Kelompok 10
-- **BAMBANG ISTIJAB - 105222007**
-- **ATHIRAH RASHIDA NAIMA - 105222027**
+- **`BAMBANG ISTIJAB - 105222007`**
+- **`ATHIRAH RASHIDA NAIMA - 105222027`**
 
 ## 📘 Deskripsi Proyek
 
@@ -159,6 +159,11 @@ Data kehadiran disimpan secara otomatis di Google Sheets atau Firebase Realtime 
 Guru, administrator, atau orang tua dapat melihat data kehadiran secara real-time atau mengakses laporan historis melalui antarmuka Google Sheets atau Aplikasi Web/Mobile khusus.
 
 ### Rencangan desain web dan spreadsheet
+#### Hardware
+![desain sistem hardware](https://i.imgur.com/mPjRDlp.jpeg)
+
+
+#### Software
 ![desain web](https://i.imgur.com/9l3uizu.png)
 
 (https://docs.google.com/spreadsheets/d/1KNYhrAqUiNw-MfpSsGHJd33RzDsm0Yf6yZZM6RxFe34/edit?usp=sharing)
