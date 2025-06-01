@@ -164,7 +164,7 @@ Guru, administrator, atau orang tua dapat melihat data kehadiran secara real-tim
 
 
 #### Software
-![desain web](https://i.imgur.com/9l3uizu.png)
+![desain web](https://i.imgur.com/B49vk82.png)
 
 (https://docs.google.com/spreadsheets/d/1KNYhrAqUiNw-MfpSsGHJd33RzDsm0Yf6yZZM6RxFe34/edit?usp=sharing)
 ![desain spreadsheet](https://i.imgur.com/83PZD9c.png)
