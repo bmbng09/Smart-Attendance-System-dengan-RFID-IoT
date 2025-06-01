@@ -158,6 +158,10 @@ Data kehadiran disimpan secara otomatis di Google Sheets atau Firebase Realtime 
 - Monitoring & Pelaporan (UI/UX):
 Guru, administrator, atau orang tua dapat melihat data kehadiran secara real-time atau mengakses laporan historis melalui antarmuka Google Sheets atau Aplikasi Web/Mobile khusus.
 
+### Rencangan desain web dan spreadsheet
+![desain web](https://i.imgur.com/9l3uizu.png)
+![desain spreadsheet](https://i.imgur.com/83PZD9c.png)
+
 
 
 
