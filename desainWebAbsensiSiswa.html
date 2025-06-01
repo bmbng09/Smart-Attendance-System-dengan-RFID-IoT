@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Absensi Siswa</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="60" cy="80" r="1.5" fill="rgba(255,255,255,0.1)"/></svg>');
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 30px;
+            background: #f8fafc;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 4px solid #4facfe;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #2563eb;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .controls {
+            padding: 20px 30px;
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .search-box {
+            flex: 1;
+            max-width: 300px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 20px 12px 45px;
+            border: 2px solid #e2e8f0;
+            border-radius: 25px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #4facfe;
+        }
+
+        .search-box::before {
+            content: '🔍';
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 16px;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border: 2px solid #e2e8f0;
+            background: white;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .filter-btn.active {
+            background: #4facfe;
+            color: white;
+            border-color: #4facfe;
+        }
+
+        .filter-btn:hover:not(.active) {
+            border-color: #4facfe;
+            color: #4facfe;
+        }
+
+        .attendance-list {
+            padding: 30px;
+        }
+
+        .attendance-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        .attendance-table th {
+            background: #f1f5f9;
+            padding: 20px;
+            text-align: left;
+            font-weight: 600;
+            color: #475569;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .attendance-table td {
+            padding: 20px;
+            border-bottom: 1px solid #f1f5f9;
+            transition: background-color 0.3s ease;
+        }
+
+        .attendance-table tr:hover {
+            background: #f8fafc;
+        }
+
+        .student-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .student-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .student-details h3 {
+            margin: 0;
+            color: #1e293b;
+            font-size: 16px;
+        }
+
+        .student-details p {
+            margin: 5px 0 0 0;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .status-badge {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-hadir {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-terlambat {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .time-stamp {
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 60px 20px;
+            color: #64748b;
+        }
+
+        .no-data-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .attendance-table {
+                font-size: 14px;
+            }
+            
+            .attendance-table th,
+            .attendance-table td {
+                padding: 15px 10px;
+            }
+            
+            .student-info {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+        }
+
+        .refresh-btn {
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .refresh-btn:hover {
+            background: #059669;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Sistem Absensi Siswa</h1>
+            <p>Monitoring Kehadiran Real-time dengan RFID</p>
+        </div>
+
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-number" id="totalHadir">28</div>
+                <div class="stat-label">Total Hadir</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalTerlambat">3</div>
+                <div class="stat-label">Terlambat</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalSiswa">35</div>
+                <div class="stat-label">Total Siswa</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="persentaseHadir">80%</div>
+                <div class="stat-label">Persentase Hadir</div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Cari nama siswa..." onkeyup="filterTable()">
+            </div>
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="filterStatus('all')">Semua</button>
+                <button class="filter-btn" onclick="filterStatus('hadir')">Hadir</button>
+                <button class="filter-btn" onclick="filterStatus('terlambat')">Terlambat</button>
+            </div>
+            <button class="refresh-btn" onclick="refreshData()">🔄 Refresh</button>
+        </div>
+
+        <div class="attendance-list">
+            <table class="attendance-table" id="attendanceTable">
+                <thead>
+                    <tr>
+                        <th>Siswa</th>
+                        <th>Kelas</th>
+                        <th>Status</th>
+                        <th>Waktu Absen</th>
+                        <th>ID Kartu</th>
+                    </tr>
+                </thead>
+                <tbody id="attendanceTableBody">
+                    <!-- Data will be populated by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Sample data - dalam implementasi nyata, ini akan diambil dari API
+        const attendanceData = [
+            {
+                id: 1,
+                nama: "Ahmad Rizki",
+                kelas: "XII IPA 1",
+                status: "hadir",
+                waktu: "07:15:32",
+                cardId: "RC522001",
+                avatar: "AR"
+            },
+            {
+                id: 2,
+                nama: "Siti Nurhaliza",
+                kelas: "XII IPA 1",
+                status: "hadir",
+                waktu: "07:20:15",
+                cardId: "RC522002",
+                avatar: "SN"
+            },
+            {
+                id: 3,
+                nama: "Budi Santoso",
+                kelas: "XII IPA 2",
+                status: "terlambat",
+                waktu: "07:35:45",
+                cardId: "RC522003",
+                avatar: "BS"
+            },
+            {
+                id: 4,
+                nama: "Dewi Lestari",
+                kelas: "XII IPS 1",
+                status: "hadir",
+                waktu: "07:10:22",
+                cardId: "RC522004",
+                avatar: "DL"
+            },
+            {
+                id: 5,
+                nama: "Eko Prasetyo",
+                kelas: "XII IPS 1",
+                status: "hadir",
+                waktu: "07:25:18",
+                cardId: "RC522005",
+                avatar: "EP"
+            },
+            {
+                id: 6,
+                nama: "Farah Diba",
+                kelas: "XII IPA 1",
+                status: "terlambat",
+                waktu: "07:40:12",
+                cardId: "RC522006",
+                avatar: "FD"
+            },
+            {
+                id: 7,
+                nama: "Gita Savitri",
+                kelas: "XII IPS 2",
+                status: "hadir",
+                waktu: "07:18:35",
+                cardId: "RC522007",
+                avatar: "GS"
+            },
+            {
+                id: 8,
+                nama: "Hendra Wijaya",
+                kelas: "XII IPA 2",
+                status: "hadir",
+                waktu: "07:22:08",
+                cardId: "RC522008",
+                avatar: "HW"
+            }
+        ];
+
+        let currentFilter = 'all';
+
+        function renderTable(data = attendanceData) {
+            const tbody = document.getElementById('attendanceTableBody');
+            
+            if (data.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="5" class="no-data">
+                            <div class="no-data-icon">📋</div>
+                            <h3>Tidak ada data absensi</h3>
+                            <p>Belum ada siswa yang melakukan absensi hari ini</p>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            tbody.innerHTML = data.map(student => `
+                <tr>
+                    <td>
+                        <div class="student-info">
+                            <div class="student-avatar">${student.avatar}</div>
+                            <div class="student-details">
+                                <h3>${student.nama}</h3>
+                                <p>ID: ${student.id.toString().padStart(3, '0')}</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>${student.kelas}</td>
+                    <td>
+                        <span class="status-badge status-${student.status}">
+                            ${student.status === 'hadir' ? '✓ Hadir' : '⚠ Terlambat'}
+                        </span>
+                    </td>
+                    <td class="time-stamp">${student.waktu}</td>
+                    <td>${student.cardId}</td>
+                </tr>
+            `).join('');
+        }
+
+        function filterTable() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            let filteredData = attendanceData;
+
+            // Filter by status
+            if (currentFilter !== 'all') {
+                filteredData = filteredData.filter(student => student.status === currentFilter);
+            }
+
+            // Filter by search term
+            if (searchTerm) {
+                filteredData = filteredData.filter(student => 
+                    student.nama.toLowerCase().includes(searchTerm) ||
+                    student.kelas.toLowerCase().includes(searchTerm)
+                );
+            }
+
+            renderTable(filteredData);
+        }
+
+        function filterStatus(status) {
+            currentFilter = status;
+            
+            // Update active button
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            filterTable();
+        }
+
+        function refreshData() {
+            // Simulate data refresh
+            const refreshBtn = document.querySelector('.refresh-btn');
+            const originalText = refreshBtn.innerHTML;
+            
+            refreshBtn.innerHTML = '🔄 Memuat...';
+            refreshBtn.disabled = true;
+            
+            setTimeout(() => {
+                // Add new random student data
+                const newStudent = {
+                    id: attendanceData.length + 1,
+                    nama: "Siswa Baru " + (attendanceData.length + 1),
+                    kelas: "XII IPA 1",
+                    status: Math.random() > 0.7 ? "terlambat" : "hadir",
+                    waktu: new Date().toLocaleTimeString('id-ID'),
+                    cardId: "RC522" + String(attendanceData.length + 1).padStart(3, '0'),
+                    avatar: "SB"
+                };
+                
+                attendanceData.unshift(newStudent);
+                updateStats();
+                filterTable();
+                
+                refreshBtn.innerHTML = originalText;
+                refreshBtn.disabled = false;
+            }, 1000);
+        }
+
+        function updateStats() {
+            const totalHadir = attendanceData.filter(s => s.status === 'hadir').length;
+            const totalTerlambat = attendanceData.filter(s => s.status === 'terlambat').length;
+            const totalSiswa = 35; // Total siswa dalam kelas
+            const persentaseHadir = Math.round((attendanceData.length / totalSiswa) * 100);
+
+            document.getElementById('totalHadir').textContent = totalHadir;
+            document.getElementById('totalTerlambat').textContent = totalTerlambat;
+            document.getElementById('persentaseHadir').textContent = persentaseHadir + '%';
+        }
+
+        // Initialize the table
+        renderTable();
+        updateStats();
+
+        // Auto refresh every 30 seconds
+        setInterval(() => {
+            // In real implementation, this would fetch new data from the server
+            console.log('Auto refresh - checking for new attendance data...');
+        }, 30000);
+    </script>
+</body>
+</html>
