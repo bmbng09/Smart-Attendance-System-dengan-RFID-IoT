@@ -60,7 +60,6 @@ Dengan sistem ini, guru tidak perlu lagi mencatat kehadiran secara manual, dan d
 5. **Data Storage**:
 Data kehadiran (UID, timestamp) disimpan di Google Sheets 
 6. **User Interface**: Data yang tersimpan dapat diakses dan divisualisasikan melalui dashboard web, aplikasi mobile, atau laporan yang dibuat dari Google Sheets, memungkinkan guru atau administrator memantau kehadiran siswa secara real-time atau melihat riwayat.
-![Smart Attendance Blok Diagram system](https://i.imgur.com/Tqk1CP3.png)
 ![Smart Attendance Blok Diagram system -  Flowchart](https://i.imgur.com/MNOEoh9.jpeg)
 
 ## 📊 Desain sistem hardware dan software
