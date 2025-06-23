@@ -70,12 +70,12 @@ Data kehadiran (UID, timestamp) disimpan di Google Sheets
 * RFID RC522 Reader: Modul untuk membaca data dari kartu RFID.
 * Koneksi ke ESP32: Melalui protokol SPI (Serial Peripheral Interface).
 * `RC522 VCC` -> `ESP32 3.3V`
-* `RC522 RST (GPIO 22)` -> `ESP32 GPIO 22`
+* `RC522 RST (GPIO 04)` -> `ESP32 GPIO 04`
 * `RC522 GND` -> `ESP32 GND`
 * `RC522 MISO (GPIO 19)` -> `ESP32 GPIO 19`
 * `RC522 MOSI (GPIO 23)` -> `ESP32 GPIO 23`
 * `RC522 SCK (GPIO 18)` -> `ESP32 GPIO 18`
-* `RC522 SDA (SS) (GPIO 21)` -> `ESP32 GPIO 21`
+* `RC522 SDA (SS) (GPIO 05)` -> `ESP32 GPIO 05`
 
 2. Unit Pemrosesan:
 * ESP32 Development Board: Mikrokontroler utama yang menjalankan logika sistem.
@@ -85,7 +85,7 @@ Data kehadiran (UID, timestamp) disimpan di Google Sheets
 3. Output Fisik / Feedback:
 * Buzzer: Memberikan indikasi suara (beep) sebagai feedback kepada pengguna.
 * Koneksi ke ESP32: Melalui pin GPIO digital.
-* `Buzzer Positif` (+) -> `ESP32 GPIO 4`
+* `Buzzer Positif` (+) -> `ESP32 GPIO 15`
 * `Buzzer Negatif` (-) -> `ESP32 GND`
 
 II. Lapisan Software (MicroPython di ESP32)
@@ -94,6 +94,7 @@ II. Lapisan Software (MicroPython di ESP32)
 
 2. Modul/Library Python:
 * `mfrc522.py`: Modul khusus yang berisi driver untuk berkomunikasi dengan hardware RFID RC522 (membaca UID, autentikasi, read/write blok data).
+* `urequests.py`: Modul khusus yang berisi driver untuk menyediakan fungsi-fungsi dasar untuk berinteraksi dengan server web menggunakan protokol HTTP (dan HTTPS)
 * `boot.py`: File Python yang dieksekusi saat ESP32 pertama kali booting. Bertanggung jawab untuk inisialisasi koneksi Wi-Fi.
 * `main.py`: File Python utama yang berisi logika inti aplikasi:
 * Membaca UID dari kartu RFID.
@@ -113,12 +114,8 @@ III. Lapisan Konektivitas
 * HTTP/HTTPS: Digunakan oleh ESP32 (`urequests`) untuk mengirim data ke layanan cloud (IFTTT).
 
 IV. Lapisan Cloud (Backend & Data Storage)
-Pilihan A: IFTTT + Google Sheets
+MySQL + CSV
 
-IFTTT (If This Then That):
-Webhooks Service (Trigger): Menerima permintaan HTTP POST dari ESP32 (event: `absensi_rfid`).
-Google Sheets Service (Action): Menambahkan baris baru ke Google Sheet berdasarkan data yang diterima dari webhook.
-Google Sheets:
 Database Sederhana: Menyimpan data kehadiran dalam format tabel (kolom contoh: `UID_Kartu`, `Timestamp`, `Nama_Siswa`, `Status`).
 
 V. Lapisan User Interface (UI) / User Experience (UX)
