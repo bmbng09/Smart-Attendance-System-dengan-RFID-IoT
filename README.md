@@ -162,10 +162,7 @@ Guru, administrator, atau orang tua dapat melihat data kehadiran secara real-tim
 
 #### Software
 ![Image](https://github.com/user-attachments/assets/5bdc5e5a-b843-4369-bac9-f8235a9d2f32)
-![desain web](https://i.imgur.com/B49vk82.png)
 
-(https://docs.google.com/spreadsheets/d/1KNYhrAqUiNw-MfpSsGHJd33RzDsm0Yf6yZZM6RxFe34/edit?usp=sharing)
-![desain spreadsheet](https://i.imgur.com/83PZD9c.png)
 
 
 
