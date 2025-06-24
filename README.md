@@ -159,6 +159,8 @@ Guru, administrator, atau orang tua dapat melihat data kehadiran secara real-tim
 #### Hardware
 ![desain sistem hardware](https://i.imgur.com/mPjRDlp.jpeg)
 
+#### Hardware:
+![Image](https://github.com/user-attachments/assets/bd543d9a-a748-4626-b7a7-7f0be503f7f3)
 
 #### Software
 ![Image](https://github.com/user-attachments/assets/5bdc5e5a-b843-4369-bac9-f8235a9d2f32)
