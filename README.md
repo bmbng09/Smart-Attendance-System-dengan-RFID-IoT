@@ -153,8 +153,7 @@ Data kehadiran disimpan secara otomatis di Mysql.
 Guru, administrator, atau orang tua dapat melihat data kehadiran secara real-time atau mengakses laporan historis melalui antarmuka Google Sheets atau Aplikasi Web/Mobile khusus.
 
 ### Rencangan desain web dan spreadsheet
-#### Hardware
-![desain sistem hardware](https://i.imgur.com/mPjRDlp.jpeg)
+![Image](https://github.com/user-attachments/assets/ea6f5261-9524-4950-bf1a-e995ce67b1cc)
 
 #### Hardware:
 ![Image](https://github.com/user-attachments/assets/bd543d9a-a748-4626-b7a7-7f0be503f7f3)
