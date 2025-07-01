@@ -42,8 +42,6 @@ Dengan sistem ini, guru tidak perlu lagi mencatat kehadiran secara manual, dan d
 - **Thony** untuk pemrograman ESP32
 - **Website + mysql** untuk tampilan data
 
-## 📊 Smart Attendance System Diagram
-![Smart Attendance Diagram](https://i.imgur.com/4zMSOno.png)
 
 ## 📊 Diagram Blok System
 **Penjelasan Alur Kerja:**
@@ -165,7 +163,7 @@ Guru, administrator, atau orang tua dapat melihat data kehadiran secara real-tim
 ![Image](https://github.com/user-attachments/assets/5bdc5e5a-b843-4369-bac9-f8235a9d2f32)
 
 #### Video Hardware, Software dan Demonstrasi 
-![Link Drive](https://drive.google.com/file/d/19QR1zLRKZMFA8OdgfEH3-hyOMejASxhr/view?usp=drive_link)
+[Link Drive](https://drive.google.com/file/d/19QR1zLRKZMFA8OdgfEH3-hyOMejASxhr/view?usp=drive_link)
 
 
 
