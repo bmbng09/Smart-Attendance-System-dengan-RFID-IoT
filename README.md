@@ -14,7 +14,7 @@ Sistem ini mendukung **SDG 4: Quality Education**, dengan mengirimkan data kehad
 
 ## 🎯 Tujuan
 
-> **Siswa scan RFID → data hadir dikirim otomatis ke cloud (Google Sheets).**
+> **Siswa scan RFID → data hadir dikirim otomatis ke mysql + website.**
 
 Dengan sistem ini, guru tidak perlu lagi mencatat kehadiran secara manual, dan data dapat diakses secara real-time dari mana saja.
 
@@ -35,12 +35,12 @@ Dengan sistem ini, guru tidak perlu lagi mencatat kehadiran secara manual, dan d
 2. ESP32 membaca UID dari kartu.
 3. Buzzer berbunyi sebagai konfirmasi.
 4. Data UID + Timestamp dikirim ke:
-   - **Google Sheets**
+   - **Mysql**
 
 ## 🧰 Tools
 
 - **Thony** untuk pemrograman ESP32
-- **Google Sheets** untuk tampilan data
+- **Website + mysql** untuk tampilan data
 
 ## 📊 Smart Attendance System Diagram
 ![Smart Attendance Diagram](https://i.imgur.com/4zMSOno.png)
@@ -58,7 +58,7 @@ Dengan sistem ini, guru tidak perlu lagi mencatat kehadiran secara manual, dan d
 4. **Cloud Platform**:
  - IFTTT Webhook: Berfungsi sebagai jembatan. ESP32 mengirimkan data ke webhook IFTTT, yang kemudian memicu aksi untuk menambahkan data ke Google Sheets.
 5. **Data Storage**:
-Data kehadiran (UID, timestamp) disimpan di Google Sheets 
+Data kehadiran (UID, timestamp) disimpan dimysql
 6. **User Interface**: Data yang tersimpan dapat diakses dan divisualisasikan melalui dashboard web, aplikasi mobile, atau laporan yang dibuat dari Google Sheets, memungkinkan guru atau administrator memantau kehadiran siswa secara real-time atau melihat riwayat.
 ![Image](https://github.com/user-attachments/assets/5bd8a331-3b2e-4ef0-87a1-eef6e6c4bf0a)
 
@@ -79,7 +79,6 @@ Data kehadiran (UID, timestamp) disimpan di Google Sheets
 2. Unit Pemrosesan:
 * ESP32 Development Board: Mikrokontroler utama yang menjalankan logika sistem.
 * Kemampuan: Pemrosesan data, konektivitas Wi-Fi, kontrol I/O.
-* Power Supply: Melalui port USB (dari komputer/adaptor) atau pin Vin/5V.
 
 3. Output Fisik / Feedback:
 * Buzzer: Memberikan indikasi suara (beep) sebagai feedback kepada pengguna.
@@ -110,7 +109,7 @@ III. Lapisan Konektivitas
 * (Bisa hotspot ponsel atau Wi-Fi standar).
 
 2. Protokol Komunikasi:
-* HTTP/HTTPS: Digunakan oleh ESP32 (`urequests`) untuk mengirim data ke layanan cloud (IFTTT).
+* HTTP/HTTPS: Digunakan oleh ESP32 (`urequests`) untuk mengirim data ke mysql
 
 IV. Lapisan Cloud (Backend & Data Storage)
 MySQL + CSV
@@ -148,10 +147,10 @@ VI. Alur Kerja (End-to-End System Flow)
 2. Buzzer berbunyi (misalnya, beep pendek) sebagai konfirmasi.
 3. ESP32 mendapatkan timestamp saat ini.
 4. ESP32 menggunakan Wi-Fi untuk terhubung ke internet (melalui `boot.py`).
-- Pengiriman Data ke Cloud:
-ESP32 mengirimkan UID dan timestamp melalui HTTP/HTTPS ke IFTTT Webhooks (yang kemudian menulis ke Google Sheets) ATAU langsung ke Firebase Realtime Database.
+- Pengiriman Data ke Mysql:
+ESP32 mengirimkan UID dan timestamp melalui HTTP/HTTPS ke Mysql
 - Penyimpanan Data:
-Data kehadiran disimpan secara otomatis di Google Sheets atau Firebase Realtime Database.
+Data kehadiran disimpan secara otomatis di Mysql.
 - Monitoring & Pelaporan (UI/UX):
 Guru, administrator, atau orang tua dapat melihat data kehadiran secara real-time atau mengakses laporan historis melalui antarmuka Google Sheets atau Aplikasi Web/Mobile khusus.
 
@@ -164,6 +163,9 @@ Guru, administrator, atau orang tua dapat melihat data kehadiran secara real-tim
 
 #### Software
 ![Image](https://github.com/user-attachments/assets/5bdc5e5a-b843-4369-bac9-f8235a9d2f32)
+
+#### Video Hardware, Software dan Demonstrasi 
+![Link Drive](https://drive.google.com/file/d/19QR1zLRKZMFA8OdgfEH3-hyOMejASxhr/view?usp=drive_link)
 
 
 
