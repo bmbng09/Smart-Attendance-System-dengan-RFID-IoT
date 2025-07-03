@@ -24,13 +24,15 @@ buzzer.off()
 
 # Dictionary UID ke Nama
 daftar_nama = {
-    '4328ad30f6': 'Athirah.R.N',
-    '535b7a0577': 'Bambang Istijab',
-    'd493babf42': 'Akiwra',
-    'e4fabbbf1a': 'algip',
-    'd3883a9afb': 'banana',
-    '09f1a90051': 'mas jawa'
+    '4328ad30f6': 'Student 1',
+    '535b7a0577': 'Student 2',
+    'd493babf42': 'Student 3',
+    'e4fabbbf1a': 'Student 4',
+    'd3883a9afb': 'Student 5',
+    '09f1a90051': 'Student 6',
+    'ff1f902b5b': 'Said'
 }
+
 
 print("Letakkan kartu RFID di dekat reader...")
 
